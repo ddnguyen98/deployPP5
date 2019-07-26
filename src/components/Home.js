@@ -5,7 +5,9 @@ import { HashRouter, Route} from 'react-router-dom'
 import Navigation from './Navigation'
 import Footer from './Footer'
 import Profile from './Profile';
-
+import UserList from './UserList'
+import Splash from './Splash'
+import { stat } from 'fs';
 class Home  extends Component {
     
   state ={
@@ -20,6 +22,17 @@ class Home  extends Component {
     dogimg: null,
     isLoadingInfo: false,
     isLoadingDog: false,
+    status:''
+    }
+    componentDidMount(){
+      firebase.auth().onAuthStateChanged((user) => {
+        if(user){
+            this.setState({status: false})
+        }
+        else{
+            this.setState({status: true})
+        }
+    })
     }
 
   // Loads all current api details
@@ -109,48 +122,50 @@ class Home  extends Component {
   //Add dogs to list to be view on profile later
   yesDogs = e =>{
     let randomId = this.create_UUID();
+    let {uEmail, uFirst, uLast, dogAge, dogBreed, dogName, dogimg, dogTemp } = this.state
     firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          firebase.database().ref(`users/${user.uid}/dogdates/${randomId}`).set({
-            dogAge: this.state.dogAge,
-            dogBreed: this.state.dogBreed,
-            dogName: this.state.dogName,
-            dogImage: this.state.dogimg,
-            dogTemp: this.state.dogTemp,
-            email: this.state.uEmail,
-            first: this.state.uFirst,
-            last: this.state.uLast,
+          if (user) {
+                firebase.database().ref(`users/${user.uid}/dogdates/${randomId}`).set({
+            dogAge: dogAge,
+            dogBreed: dogBreed,
+            dogName: dogName,
+            dogimg: dogimg,
+            dogTemp: dogTemp,
+            email: uEmail,
+            first: uFirst,
+            last: uLast,
             status: 'yes',
           }); 
         }
       });
-    this.setState({isLoadingDog: false, isLoadingInfo: false, dogimg: null})
-    this.loadApi();
+      this.setState({isLoadingDog: false, isLoadingInfo: false, dogimg: null})
+      this.loadApi();
   }
   noDogs = e =>{
     let randomId = this.create_UUID();
+    let {uEmail, uFirst, uLast, dogAge, dogBreed, dogName, dogimg, dogTemp } = this.state
     firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          firebase.database().ref(`users/${user.uid}/dogdates/${randomId}`).set({
-            dogAge: this.state.dogAge,
-            dogBreed: this.state.dogBreed,
-            dogName: this.state.dogName,
-            dogImage: this.state.dogimg,
-            dogTemp: this.state.dogTemp,
-            email: this.state.uEmail,
-            first: this.state.uFirst,
-            last: this.state.uLast,
+          if (user) {
+                firebase.database().ref(`users/${user.uid}/dogdates/${randomId}`).set({
+            dogAge: dogAge,
+            dogBreed: dogBreed,
+            dogName: dogName,
+            dogimg: dogimg,
+            dogTemp: dogTemp,
+            email: uEmail,
+            first: uFirst,
+            last: uLast,
             status: 'no',
           }); 
         }
       });
-    this.setState({isLoadingDog: false, isLoadingInfo: false, dogimg: null})
-    this.loadApi();
+      this.setState({isLoadingDog: false, isLoadingInfo: false, dogimg: null})
+      this.loadApi();
   }
   //store more than 1 user to load data, holder user data in set state along with details of dog you will be viewing
  
     render(){
-        let { isLoadingInfo, isLoadingDog, uEmail, uFirst, uLast, dogAge, dogBreed, dogName, dogimg, dogTemp } = this.state
+        let { isLoadingInfo, isLoadingDog, uEmail, uFirst, uLast, dogAge, dogBreed, dogName, dogimg, dogTemp, status } = this.state
 
         if(isLoadingDog === false || isLoadingInfo === false ){
           this.loadApi();
@@ -170,27 +185,39 @@ class Home  extends Component {
             <HashRouter>
               <Navigation/>
               <Route exact path="/" render={()=>{
-                return(
-                  <Container>
-                    <Card>
-                      <Card.Body>                  
-                        <img src={dogimg} alt="Dog Img" height="200" width="200"></img>
-                        <p id="">{dogBreed}</p>
-                        <p id="">{dogAge}</p>
-                        <p>Hello my name is {dogName} and I am {dogTemp}.</p>
-                        <p>My owner is called {uFirst} {uLast}.</p>
-                        <p>You can contact my owner at {uEmail}.</p>
-                        <button onClick={this.yesDogs}>Playdate</button>
-                        <button onClick={this.noDogs}>No Thanks</button>
-                        </Card.Body>
-                    </Card>              
-                  </Container>
+                if(status){
+                  return(
+                    <Splash/>
                   )
+                }
+                else{
+                  return(
+                    <Container>
+                      <Card>
+                        <Card.Body>                  
+                          <img src={dogimg} alt="Dog Img" height="200" width="200"></img>
+                          <p id="">{dogBreed}</p>
+                          <p id="">{dogAge}</p>
+                          <p>Hello my name is {dogName} and I am {dogTemp}.</p>
+                          <p>My owner is called {uFirst} {uLast}.</p>
+                          <p>You can contact my owner at {uEmail}.</p>
+                          <button onClick={this.yesDogs}>Playdate</button>
+                          <button onClick={this.noDogs}>No Thanks</button>
+                          </Card.Body>
+                      </Card>              
+                    </Container>
+                    )
+                }
               }}/>
               <Route path="/profile" render={()=>{
                 return(
                   <Profile/>
 
+                )
+              }}/>
+              <Route path="/matches" render={()=>{
+                return(
+                  <UserList/>
                 )
               }}/>
               <Footer/>

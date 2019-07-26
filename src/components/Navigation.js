@@ -8,7 +8,8 @@ class Navigation extends Component{
         email: '',
         password: '',
         status: '',
-        show: false
+        show: false,
+        message: ''
     }
 
 
@@ -22,8 +23,6 @@ class Navigation extends Component{
                 this.setState({status: true})
             }
         })
-
-
     }
     
     //Checks for correct login
@@ -31,20 +30,22 @@ class Navigation extends Component{
         const { email, password } = this.state;
     
         firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(function(){})
-        .catch(function(error) {
-            let errorCode = error.code;
+        .then(()=>{
+            this.setState({message: "Account logged in"})
+            this.changeValTrue();
+        })
+        .catch(error =>{
             let errorMessage = error.message;
-            console.log(errorCode)
-            console.log(errorMessage);
+            this.setState({message: errorMessage})
+            this.changeValTrue();
           });
     }
     //Creates account based on details submited and matches it with users on database to see if they exist
     createAccount = e =>{
-    const { email, password } = this.state;
+    const { email, password, message } = this.state;
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(function(){
+    .then(()=>{
         firebase.auth().onAuthStateChanged((user) => {
             firebase.database().ref(`users/${user.uid}`).set({
                 dogdates: ' ',
@@ -54,19 +55,20 @@ class Navigation extends Component{
                 dogName: 'Dogs name',
                 first: 'Your first name',
                 last: 'your Last name'
-                })
+            })
+            
         })
+        this.setState({message: "Account Created"})
+        this.changeValTrue();
     })
-    .catch(function(error) {
-        let errorCode = error.code;
+    .catch(error=>{
         let errorMessage = error.message;
-        console.log(errorCode)
-        console.log(errorMessage);
+        this.setState({message: errorMessage})
+        this.changeValTrue();
         });
     }
     //Gathers values to be collected for submit
     loginValue = e =>{
-
     if(e.target.id === 'email'){
         this.setState({email: e.target.value})
     }
@@ -77,10 +79,13 @@ class Navigation extends Component{
     //logs out current user.
     logOut = e =>{
     firebase.auth().signOut().then(function() {
+        this.setState({message: 'Succesful Logout'})
+        this.changeValTrue();
         }).catch(function(error) {
         });
     }
-    changVal = () =>{this.setState({show:true})}
+    changeValTrue = () =>{this.setState({show:true})}
+    changeValFalse= () =>{this.setState({show:false})}
 
   render(){
       //If logged in will change navbar
@@ -88,11 +93,10 @@ class Navigation extends Component{
     if(status){
         return(
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                <Navbar.Brand href="#home">Paw Pals</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto justify-content-end">
-                        <Nav.Link href="/">Home</Nav.Link>
                         </Nav>
                         <Form inline>
                             <FormControl type="email" placeholder="Email" className="mr-sm-2" id="email" onChange={this.loginValue}/>
@@ -101,6 +105,17 @@ class Navigation extends Component{
                             <Button variant="outline-success" onClick={this.createAccount}>Sign Up</Button>
                         </Form>
                 </Navbar.Collapse>
+                <Modal show={this.state.show} onHide={this.changeValFalse}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Notification</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>{this.state.message}</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary"  onClick={this.changeValFalse}>
+                        Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>  
             </Navbar>
         )
     }
@@ -113,21 +128,17 @@ class Navigation extends Component{
                         <Nav className="mr-auto justify-content-end">
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="#/profile">Profile</Nav.Link>
-                        <Nav.Link href="#/message">Message</Nav.Link>
+                        <Nav.Link href="#/matches">Matches</Nav.Link>
                         </Nav>
                         <Nav.Link href="/"><Button variant="outline-success" onClick={this.logOut}>Logout</Button></Nav.Link>
-                        <Button onClick={this.changVal}>Test</Button>
-                        <Modal show={this.state.show} >
+                        <Modal show={this.state.show} onHide={this.changeValFalse}>
                             <Modal.Header closeButton>
-                                <Modal.Title>Modal heading</Modal.Title>
+                                <Modal.Title>Notification</Modal.Title>
                             </Modal.Header>
-                            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                            <Modal.Body>{this.state.message}</Modal.Body>
                             <Modal.Footer>
-                                <Button variant="secondary">
+                                <Button variant="primary"  onClick={this.changeValFalse}>
                                 Close
-                                </Button>
-                                <Button variant="primary">
-                                Save Changes
                                 </Button>
                             </Modal.Footer>
                         </Modal>              

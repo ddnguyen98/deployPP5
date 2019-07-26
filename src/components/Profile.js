@@ -61,25 +61,11 @@ class Profile extends Component{
     }
 
     render(){
-        const {dogName, dogAge, dogBreed, firstName, lastName, bio, loaded, dogdates} = this.state
-        let yesData = [];
-        let noData = [];
+        const {dogName, dogAge, dogBreed, firstName, lastName, bio} = this.state
 
-
-        if(loaded){
-            dogdates.forEach(dog=>{
-                if(dog.status === 'yes'){
-                    yesData.push(dog)
-                }
-                else if(dog.status === 'no'){
-                    noData.push(dog)
-                }
-            })
-        }
 
         return(
             <Container>
-                
                 <Card>
                     <Card.Body> 
                         <img src="https://pawedin.com/system/pets/default_images/default_pet.jpg" width="200" height="200" alt="placeholder"></img>                 
@@ -107,48 +93,6 @@ class Profile extends Component{
                         </Button>
                     </Form>
                     </Card.Body>
-                    <Container>                    
-                        <h2>Play date friends</h2>
-                    <Table striped bordered hover>
-                        <thead>
-                        <tr>
-                            <th>Dog</th>
-                            <th>Owner</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            {yesData.map(dog=>{
-                                return(
-                                    <tr key={dog.first+dog.last}>
-                                        <td>{dog.dogName}</td>
-                                        <td>{dog.first} {dog.last}</td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </Table>
-                    </Container>
-                    <Container>                    
-                        <h2>Maybe later friends</h2>
-                    <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                        <th>Dog</th>
-                        <th>Owner</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {noData.map(dog=>{
-                                return(
-                                    <tr key={dog.first+dog.last}>
-                                        <td>{dog.dogName}</td>
-                                        <td>{dog.first} {dog.last}</td>
-                                    </tr>
-                                )
-                            })}
-                    </tbody>
-                    </Table>
-                    </Container>
                 </Card>
                 
             </Container>
