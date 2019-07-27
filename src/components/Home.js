@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import {Card, Container, Spinner} from 'react-bootstrap'
+import {Card, Container, Spinner, Button} from 'react-bootstrap'
 import { HashRouter, Route} from 'react-router-dom'
 import Navigation from './Navigation'
 import Footer from './Footer'
 import Profile from './Profile';
 import UserList from './UserList'
 import Splash from './Splash'
-import { stat } from 'fs';
+
 class Home  extends Component {
     
   state ={
@@ -173,11 +173,9 @@ class Home  extends Component {
     
         if(isLoadingDog === false || isLoadingInfo === false ){
           return( 
-          <Container>
-            <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-          </Spinner>
-        </Container>
+          <Container style={styles.loading}>
+            
+          </Container>
         )
         }
         else if(isLoadingDog === true && isLoadingInfo === true){
@@ -192,18 +190,23 @@ class Home  extends Component {
                 }
                 else{
                   return(
-                    <Container>
-                      <Card>
-                        <Card.Body>                  
-                          <img src={dogimg} alt="Dog Img" height="200" width="200"></img>
-                          <p id="">{dogBreed}</p>
-                          <p id="">{dogAge}</p>
-                          <p>Hello my name is {dogName} and I am {dogTemp}.</p>
-                          <p>My owner is called {uFirst} {uLast}.</p>
-                          <p>You can contact my owner at {uEmail}.</p>
-                          <button onClick={this.yesDogs}>Playdate</button>
-                          <button onClick={this.noDogs}>No Thanks</button>
+                    <Container >
+                      <Card style={styles.card}>
+                      <Button onClick={this.yesDogs} style={styles.button} variant="danger">Playdate</Button>
+                        <Card.Body style={styles.contents}>  
+                          <div>                
+                          <img src={dogimg} alt="Dog Img" height="300" width="300" style={styles.img}></img>
+                          <h1 style={styles.name}>{dogName.toUpperCase()}</h1>
+                          <h2 style={styles.breed}>{dogBreed}</h2>
+                          <h3 style={styles.age}>Age: {dogAge}</h3>
+                          </div>
+                          <Container style={styles.bio}>
+                            <p>Hello my name is {dogName} and I am {dogTemp}. I enjoy playing in the park with other dogs and eating snacks</p>
+                            <p>My owner is called {uFirst} {uLast} and they take very good care o me.</p>
+                            <p>You can contact my owner at {uEmail} and I hope we can have a fun playdate!</p>
+                          </Container>
                           </Card.Body>
+                          <Button onClick={this.noDogs} style={styles.button} variant="danger">No Thanks</Button>
                       </Card>              
                     </Container>
                     )
@@ -212,7 +215,6 @@ class Home  extends Component {
               <Route path="/profile" render={()=>{
                 return(
                   <Profile/>
-
                 )
               }}/>
               <Route path="/matches" render={()=>{
@@ -226,6 +228,45 @@ class Home  extends Component {
         }  
     }
 
+}
+
+const styles = {
+  card: {
+    margin: '100px 0'
+  },
+  img:{
+    float: 'left',
+    border: '#DADADA solid 1px',
+    margin: '10px'
+  },
+  bio:{
+    clear:'both'
+  },
+  contents:{
+  },
+  button:{
+  },
+  age:{
+    padding:'10px 0 0 0',
+    fontSize: '20px'
+  },
+  name:{
+    padding:'10px 0 0 0',
+    color:'#9A1212',
+    fontWeight:'bold',
+    fontSize: '40px'
+  },
+  breed:{
+    padding:'10px 0 0 0',
+    color:'#9A1212',
+    fontSize: '30px'
+  },
+  loading:{
+    background:"white"
+  },
+  loadingcard:{
+    margin: "100px"
+  }
 }
 
 export default Home

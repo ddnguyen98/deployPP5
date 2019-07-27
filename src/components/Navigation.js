@@ -40,33 +40,6 @@ class Navigation extends Component{
             this.changeValTrue();
           });
     }
-    //Creates account based on details submited and matches it with users on database to see if they exist
-    createAccount = e =>{
-    const { email, password, message } = this.state;
-
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(()=>{
-        firebase.auth().onAuthStateChanged((user) => {
-            firebase.database().ref(`users/${user.uid}`).set({
-                dogdates: ' ',
-                bio: 'Enter dog bio here',
-                dogAge: 'Age of dog',
-                dogBreed: 'Breed of dog',
-                dogName: 'Dogs name',
-                first: 'Your first name',
-                last: 'your Last name'
-            })
-            
-        })
-        this.setState({message: "Account Created"})
-        this.changeValTrue();
-    })
-    .catch(error=>{
-        let errorMessage = error.message;
-        this.setState({message: errorMessage})
-        this.changeValTrue();
-        });
-    }
     //Gathers values to be collected for submit
     loginValue = e =>{
     if(e.target.id === 'email'){
@@ -92,7 +65,7 @@ class Navigation extends Component{
     const {status} = this.state;
     if(status){
         return(
-            <Navbar bg="light" expand="lg">
+            <Navbar bg="dark" variant="dark" expand="lg">
                 <Navbar.Brand href="#home">Paw Pals</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
@@ -101,8 +74,7 @@ class Navigation extends Component{
                         <Form inline>
                             <FormControl type="email" placeholder="Email" className="mr-sm-2" id="email" onChange={this.loginValue}/>
                             <FormControl type="password" placeholder="Password" className="mr-sm-2" id="password" onChange={this.loginValue}/>
-                            <Button variant="outline-success" onClick={this.submitLogin}>Login</Button>
-                            <Button variant="outline-success" onClick={this.createAccount}>Sign Up</Button>
+                            <Button variant="outline-danger" onClick={this.submitLogin}>Login</Button>
                         </Form>
                 </Navbar.Collapse>
                 <Modal show={this.state.show} onHide={this.changeValFalse}>
@@ -111,7 +83,7 @@ class Navigation extends Component{
                     </Modal.Header>
                     <Modal.Body>{this.state.message}</Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary"  onClick={this.changeValFalse}>
+                        <Button variant="danger"  onClick={this.changeValFalse}>
                         Close
                         </Button>
                     </Modal.Footer>
@@ -121,8 +93,8 @@ class Navigation extends Component{
     }
     else{
         return(
-            <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>   
+            <Navbar bg="dark" variant="dark" expand="lg">
+                <Navbar.Brand href="#home">Paw Pals</Navbar.Brand>   
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto justify-content-end">
@@ -130,14 +102,14 @@ class Navigation extends Component{
                         <Nav.Link href="#/profile">Profile</Nav.Link>
                         <Nav.Link href="#/matches">Matches</Nav.Link>
                         </Nav>
-                        <Nav.Link href="/"><Button variant="outline-success" onClick={this.logOut}>Logout</Button></Nav.Link>
+                        <Nav.Link href="/"><Button variant="outline-danger" onClick={this.logOut}>Logout</Button></Nav.Link>
                         <Modal show={this.state.show} onHide={this.changeValFalse}>
                             <Modal.Header closeButton>
                                 <Modal.Title>Notification</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>{this.state.message}</Modal.Body>
                             <Modal.Footer>
-                                <Button variant="primary"  onClick={this.changeValFalse}>
+                                <Button variant="danger"  onClick={this.changeValFalse}>
                                 Close
                                 </Button>
                             </Modal.Footer>

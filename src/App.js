@@ -11,11 +11,16 @@ class App extends Component{
 
   render(){
     return(
-      <div>
-      <Home/>
+      <div style={styles.body}>
+      <Home />
       </div>
     )
    }
+}
+const styles = {
+  body: {
+    background: '#DADADA'
+  }
 }
 
 export default App;

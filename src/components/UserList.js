@@ -67,10 +67,8 @@ class UserList extends Component{
                 </Modal.Header>
                 <Modal.Body>
                     {dogdates.map(dog=>{
-                        console.log(dog)
                         if(dog.id === selectedId){
-                            console.log(dog)
-                            return(
+                                return(
                                 <div key="modal">
                                     <img src={dog.dogimg} alt="Dog Img" height="200" width="200"></img>
                                     <p>{dog.dogName}</p>

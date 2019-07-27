@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, Container, Form, Table,Button,Modal} from 'react-bootstrap'
+import {Card, Container, Form, Button} from 'react-bootstrap'
 import * as firebase from 'firebase';
 
 
@@ -66,39 +66,77 @@ class Profile extends Component{
 
         return(
             <Container>
-                <Card>
+                <Card style={styles.card}>
                     <Card.Body> 
-                        <img src="https://pawedin.com/system/pets/default_images/default_pet.jpg" width="200" height="200" alt="placeholder"></img>                 
-                    <Form>
-                        <Form.Group controlId="dogName">
-                            <Form.Control type="text" value={dogName} onChange={this.storeInfo} />
-                        </Form.Group>
-                        <Form.Group controlId="dogBreed">
-                            <Form.Control type="text" value={dogBreed} onChange={this.storeInfo}/>
-                        </Form.Group>
-                        <Form.Group controlId="dogAge">
-                            <Form.Control type="text" value={dogAge} onChange={this.storeInfo}/>
-                        </Form.Group>
-                        <Form.Group controlId="firstName">
-                            <Form.Control type="text" value={firstName} onChange={this.storeInfo}/>
-                        </Form.Group>
-                        <Form.Group controlId="lastName">
-                            <Form.Control type="text" value={lastName} onChange={this.storeInfo}/>
-                        </Form.Group>
-                        <Form.Group controlId="bio">
-                            <Form.Control as="textarea" rows="3" value={bio} onChange={this.storeInfo}/>
-                        </Form.Group>
-                        <Button variant="primary" type="button" onClick={this.updateInfo}>
-                            Update
-                        </Button>
+                    <Form style={styles.content}>
+                        <div>
+                        <img src="https://pawedin.com/system/pets/default_images/default_pet.jpg" 
+                        width="300" height="300" style={styles.img} alt="placeholder"></img>                 
+
+                            <Form.Control placeholder="Dog Name" type="text" id="dogName" value={dogName} style={styles.name} onChange={this.storeInfo} />
+
+                            <Form.Control placeholder="Dog Breed" type="text" id="dogBreed" value={dogBreed} style={styles.breed} onChange={this.storeInfo}/>
+
+                            <Form.Control placeholder="Dog Age" type="text" id="dogAge" value={dogAge} style={styles.age} onChange={this.storeInfo}/>
+
+                            <Form.Control placeholder="First" type="text" id="first" value={firstName} style={styles.age} onChange={this.storeInfo}/>
+
+                            <Form.Control placeholder="Last" type="text" id="last" value={lastName} style={styles.age} onChange={this.storeInfo}/>
+                            </div>
+                            <Form.Control placeholder="Enter Bio Here" as="textarea" id="bio" rows="5" value={bio} style={styles.bio}onChange={this.storeInfo}/>
+
                     </Form>
                     </Card.Body>
+                    <Button variant="danger" type="button" onClick={this.updateInfo}>
+                            Update
+                            </Button>
                 </Card>
                 
             </Container>
         )
     }
 }
+
+const styles = {
+    img: {
+        float: 'left',
+        border: '#DADADA solid 1px',
+        margin: '0 10px 10px'
+      },
+      card:{
+          margin:'50px'
+      },
+      input:{
+          width: "25%"
+      },
+      content:{
+          display:"inline"
+      },
+      age:{
+        fontSize: '20px',
+        width: "40%",
+        margin: "5px"
+      },
+      name:{
+        color:'#9A1212',
+        fontWeight:'bold',
+        fontSize: '40px',
+        width: "40%",
+        margin: "5px"
+
+      },
+      breed:{
+        color:'#9A1212',
+        fontSize: '30px',
+        width: "40%",
+        margin: "5px"
+
+      },
+      bio:{
+        margin: "5px"
+      }
+  }
+
 
 export default Profile;
 
