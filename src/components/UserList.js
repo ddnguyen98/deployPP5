@@ -60,7 +60,7 @@ class UserList extends Component{
         })
     }    
     return(
-        <Container>
+        <Container style={styles.content}>
             <Modal show={this.state.show} onHide={this.changeValFalse}>
                 <Modal.Header closeButton>
                     <Modal.Title>Notification</Modal.Title>
@@ -92,9 +92,9 @@ class UserList extends Component{
                     </Button>
                 </Modal.Footer>
             </Modal>  
-            <Container>           
+            <div style={styles.table}>           
             <h2>Play Date Friends</h2>         
-                <Table striped bordered hover>
+                <Table striped bordered hover variant="dark">
                     <thead>
                         <tr>
                             <th>Dog</th>
@@ -105,17 +105,17 @@ class UserList extends Component{
                     {yesData.map(dog=>{
                     return(
                         <tr key={dog.first + dog.last} >
-                            <td><Button id={dog.id} onClick={this.loadData}>View Profile</Button>{dog.dogName}</td>
+                            <td><Button id={dog.id} onClick={this.loadData} style={styles.button} variant="danger">View Profile</Button>{dog.dogName}</td>
                             <td>{dog.first} {dog.last}</td>
                         </tr>
                     )
                     })}
                     </tbody>
                 </Table>
-            </Container>
-            <Container>
+            </div>
+            <div style={styles.table}>
             <h2>Maybe Play Dates</h2>                    
-                    <Table striped bordered hover>
+                    <Table striped bordered hover variant="dark">
                         <thead>
                             <tr>
                             <th>Dog</th>
@@ -126,17 +126,31 @@ class UserList extends Component{
                         {noData.map(dog=>{
                         return(
                         <tr key={dog.first + dog.last} id={dog.id}>
-                            <td><Button id={dog.id} onClick={this.loadData}>View Profile</Button>{dog.dogName}</td>
+                            <td><Button id={dog.id} onClick={this.loadData} style={styles.button} variant="danger">View Profile</Button>{dog.dogName}</td>
                             <td>{dog.first} {dog.last}</td>
                         </tr>
                         )
                         })}
                         </tbody>
                     </Table>
-            </Container>
+            </div>
         </Container>
     )
    }
 }
-
+const styles = {
+    table: {
+        width: 'calc(50% - 20px)',
+        display:'inline-block',
+        margin: '10px'
+      },
+      content:{
+          display:'block',
+          margin: '0 auto',
+          padding: '50px 0 150px'
+      },
+      button:{
+          margin:"0 15px"
+      }
+  }
 export default UserList;

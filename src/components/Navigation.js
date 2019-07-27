@@ -66,7 +66,7 @@ class Navigation extends Component{
     if(status){
         return(
             <Navbar bg="dark" variant="dark" expand="lg">
-                <Navbar.Brand href="#home">Paw Pals</Navbar.Brand>
+                <Navbar.Brand href="/#">Paw Pals</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto justify-content-end">
@@ -94,11 +94,11 @@ class Navigation extends Component{
     else{
         return(
             <Navbar bg="dark" variant="dark" expand="lg">
-                <Navbar.Brand href="#home">Paw Pals</Navbar.Brand>   
+                <Navbar.Brand href="/#">Paw Pals</Navbar.Brand>   
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto justify-content-end">
-                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/#">Home</Nav.Link>
                         <Nav.Link href="#/profile">Profile</Nav.Link>
                         <Nav.Link href="#/matches">Matches</Nav.Link>
                         </Nav>
