@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Table, Modal, Button} from 'react-bootstrap'
+import {Container, Table, Modal, Button, Card} from 'react-bootstrap'
 import * as firebase from 'firebase';
 
 
@@ -61,36 +61,30 @@ class UserList extends Component{
     }    
     return(
         <Container style={styles.content}>
-            <Modal show={this.state.show} onHide={this.changeValFalse}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Notification</Modal.Title>
+            <Modal show={this.state.show} onHide={this.changeValFalse}  size="lg">
+                <Modal.Header closeButton >
                 </Modal.Header>
-                <Modal.Body>
                     {dogdates.map(dog=>{
                         if(dog.id === selectedId){
                                 return(
-                                <div key="modal">
-                                    <img src={dog.dogimg} alt="Dog Img" height="200" width="200"></img>
-                                    <p>{dog.dogName}</p>
-                                    <p>{dog.dogAge}</p>
-                                    <p>{dog.dogBreed}</p>
-                                    <p>{dog.email}</p>
-                                    <p>{dog.first}</p>
-                                    <p>{dog.last}</p>
-                                    <p>Hello my name is {dog.dogName} and I am {dog.dogTemp}.
-                                    My owner is called {dog.first} {dog.last}. I hope I can get
-                                    To be your friend today!
-                                    </p>
-                                </div>
+                                    <Card style={styles.card} key="modal">
+                                      <Card.Body style={styles.contents}>  
+                                        <div>                
+                                        <img src={dog.dogimg} alt="Dog Img" height="400" width="500" style={styles.img}></img>
+                                        <h1 style={styles.name}>{dog.dogName.toUpperCase()}</h1>
+                                        <h2 style={styles.breed}>{dog.dogBreed}</h2>
+                                        <h3 style={styles.age}>Age: {dog.dogAge}</h3>
+                                        </div>
+                                        <Container style={styles.bio}>
+                                          <p>Hello my name is {dog.dogName} and I am {dog.dogTemp}. I enjoy playing in the park with other dogs and eating snacks</p>
+                                          <p>My owner is called {dog.first} {dog.last} and they take very good care o me.</p>
+                                          <p>You can contact my owner at {dog.email} and I hope we can have a fun playdate!</p>
+                                        </Container>
+                                        </Card.Body>
+                                    </Card>  
                             )
                         }
                     })}
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary"  onClick={this.changeValFalse}>
-                    Close
-                    </Button>
-                </Modal.Footer>
             </Modal>  
             <div style={styles.table}>           
             <h2>Play Date Friends</h2>         
@@ -151,6 +145,34 @@ const styles = {
       },
       button:{
           margin:"0 15px"
+      },
+      card: {
+      },
+      img:{
+        float: 'left',
+        border: '#DADADA solid 1px',
+        margin: '10px'
+      },
+      bio:{
+        clear:'both'
+      },
+      age:{
+        padding:'10px 0 0 0',
+        fontSize: '20px'
+      },
+      name:{
+        padding:'10px 0 0 0',
+        color:'#9A1212',
+        fontWeight:'bold',
+        fontSize: '40px'
+      },
+      breed:{
+        padding:'10px 0 0 0',
+        color:'#9A1212',
+        fontSize: '30px'
+      },
+      modal:{
+          width:'1000px'
       }
   }
 export default UserList;

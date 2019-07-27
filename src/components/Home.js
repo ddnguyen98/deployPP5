@@ -195,7 +195,7 @@ class Home  extends Component {
                       <Button onClick={this.yesDogs} style={styles.button} variant="danger">Playdate</Button>
                         <Card.Body style={styles.contents}>  
                           <div>                
-                          <img src={dogimg} alt="Dog Img" height="300" width="300" style={styles.img}></img>
+                          <img src={dogimg} alt="Dog Img" height="400" width="500" style={styles.img}></img>
                           <h1 style={styles.name}>{dogName.toUpperCase()}</h1>
                           <h2 style={styles.breed}>{dogBreed}</h2>
                           <h3 style={styles.age}>Age: {dogAge}</h3>
