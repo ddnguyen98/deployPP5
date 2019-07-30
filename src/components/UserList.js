@@ -70,14 +70,14 @@ class UserList extends Component{
                                     <Card style={styles.card} key="modal">
                                       <Card.Body style={styles.contents}>  
                                         <div>                
-                                        <img src={dog.dogimg} alt="Dog Img" height="400" width="500" style={styles.img}></img>
+                                        <img src={dog.dogimg} alt="Dog Img" height="50%" width="50%" style={styles.img}></img>
                                         <h1 style={styles.name}>{dog.dogName.toUpperCase()}</h1>
                                         <h2 style={styles.breed}>{dog.dogBreed}</h2>
                                         <h3 style={styles.age}>Age: {dog.dogAge}</h3>
                                         </div>
                                         <Container style={styles.bio}>
                                           <p>Hello my name is {dog.dogName} and I am {dog.dogTemp}. I enjoy playing in the park with other dogs and eating snacks</p>
-                                          <p>My owner is called {dog.first} {dog.last} and they take very good care o me.</p>
+                                          <p>My owner is called {dog.first} {dog.last} and they take very good care of me.</p>
                                           <p>You can contact my owner at {dog.email} and I hope we can have a fun playdate!</p>
                                         </Container>
                                         </Card.Body>

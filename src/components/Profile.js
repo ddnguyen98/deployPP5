@@ -71,7 +71,7 @@ class Profile extends Component{
                     <Form style={styles.content}>
                         <div>
                         <img src="https://pawedin.com/system/pets/default_images/default_pet.jpg" 
-                        height="400" width="500" style={styles.img} alt="placeholder"></img>                 
+                       height="40%" width="40%" style={styles.img} alt="placeholder"></img>                 
 
                             <Form.Control placeholder="Dog Name" type="text" id="dogName" value={dogName} style={styles.name} onChange={this.storeInfo} />
 

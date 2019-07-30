@@ -69,22 +69,17 @@ class Splash extends Component{
                 <Card style={styles.card}>
                 <Container style={styles.content}>
                     <Card.Body>
-                    Welcome to paw pals! Sign up here!
+                    <h1>Welcome to paw pals!</h1> Sign up here!
                     Meet plenty of new friends from many users around to have the best experience of a life time!
+                    <p>Get a list of playdates for your pup to have fun with.</p>
                     </Card.Body>
-                    <Form>
-                          <Form.Group controlId="formBasicEmail">
-                        <FormControl type="email" placeholder="Email" className="mr-sm-2" id="semail" onChange={this.loginValue}/>
-                        </Form.Group>
-                        <Form.Group controlId="formBasicEmail">
+                    <Form style={styles.form}>
+                        <FormControl style={styles.input} type="email" placeholder="Email" className="mr-sm-2" id="semail" onChange={this.loginValue}/>
 
-                        <FormControl type="password" placeholder="Password" className="mr-sm-2" id="spassword" onChange={this.loginValue}/>
-                        </Form.Group>
-                        <Form.Group controlId="formBasicEmail">
-                        <FormControl type="password" placeholder="Type Password Again" className="mr-sm-2" id="spassword2" onChange={this.loginValue}/>
-                        </Form.Group>
+                        <FormControl style={styles.input} type="password" placeholder="Password" className="mr-sm-2" id="spassword" onChange={this.loginValue}/>
+                        <FormControl style={styles.input} type="password" placeholder="Type Password Again" className="mr-sm-2" id="spassword2" onChange={this.loginValue}/>
 
-                    <Button variant="outline-danger" onClick={this.createAccount}>Sign Up</Button>
+                    <Button variant="outline-danger" style={styles.button} onClick={this.createAccount}>Sign Up</Button>
                     </Form>
                     </Container>
                 </Card>
@@ -106,11 +101,24 @@ class Splash extends Component{
 }
 const styles = {
     card: {
-        margin: '120px 0'
+        margin: '120px 0',
+        textAlign: 'center'
       },
       content:{
           padding:'20px'
       },
+      button:{
+          textAlign: 'center',
+          width: '100px',
+          margin: '0 auto'
+      },
+      form:{
+          width: '50%',
+          margin: '0 auto'
+      },
+      input:{
+          margin: '10px 0'
+      }
   }
 
 export default Splash;

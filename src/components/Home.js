@@ -192,10 +192,10 @@ class Home  extends Component {
                   return(
                     <Container >
                       <Card style={styles.card}>
-                      <Button onClick={this.yesDogs} style={styles.button} variant="danger">Playdate</Button>
+                      <Button onClick={this.yesDogs} style={styles.button} variant="danger">Go On A Playdate!</Button>
                         <Card.Body style={styles.contents}>  
                           <div>                
-                          <img src={dogimg} alt="Dog Img" height="400" width="500" style={styles.img}></img>
+                          <img src={dogimg} alt="Dog Img" height="40%" width="40%" style={styles.img}></img>
                           <h1 style={styles.name}>{dogName.toUpperCase()}</h1>
                           <h2 style={styles.breed}>{dogBreed}</h2>
                           <h3 style={styles.age}>Age: {dogAge}</h3>
@@ -206,7 +206,7 @@ class Home  extends Component {
                             <p>You can contact my owner at {uEmail} and I hope we can have a fun playdate!</p>
                           </Container>
                           </Card.Body>
-                          <Button onClick={this.noDogs} style={styles.button} variant="danger">No Thanks</Button>
+                          <Button onClick={this.noDogs} style={styles.button} variant="danger">Maybe Next Time!</Button>
                       </Card>              
                     </Container>
                     )
