@@ -36,7 +36,6 @@ class UserList extends Component{
   }
 
   deleteDog = e =>{
-      console.log(this.state.selectedId)
     firebase.auth().onAuthStateChanged((user) => {
         firebase.database().ref('/users/' + user.uid + '/dogdates/' + this.state.selectedId).remove();
     })
