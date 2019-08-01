@@ -143,7 +143,7 @@ class UserList extends Component{
                 </Table>
             </div>
             <div style={styles.table}>
-            <h2 >Maybe Play Dates</h2>                    
+            <h2 >Declined Playdates</h2>                    
                     <Table striped bordered hover variant="dark">
                         <thead>
                             <tr>
@@ -176,7 +176,7 @@ const styles = {
       content:{
           display:'block',
           margin: '0 auto',
-          padding: '50px 0 150px'
+          padding: '100px 0 285px'
       },
       button:{
           margin:"0 10px"

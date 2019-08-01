@@ -54,7 +54,7 @@ class Home  extends Component {
         this.loadDetailsDname();
       }
       else{
-        this.setState({dogName : data.results[0].name.first})
+        this.setState({dogName : this.jsUcfirst(data.results[0].name.first)})
       }
     })
   }
@@ -68,7 +68,7 @@ class Home  extends Component {
         this.loadDetailsPerson();
       }
       else{
-        this.setState({uFirst : data.results[0].name.first, uLast : data.results[0].name.last, uEmail : data.results[0].email, isLoadingInfo: true}) 
+        this.setState({uFirst : this.jsUcfirst(data.results[0].name.first), uLast : this.jsUcfirst(data.results[0].name.last), uEmail : data.results[0].email, isLoadingInfo: true}) 
         this.loadDetailsDname();
       }
     })
@@ -106,6 +106,12 @@ class Home  extends Component {
       }
     })
   }
+
+  
+jsUcfirst = string =>
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
   //Random id for random users being stored
   create_UUID = e =>{
