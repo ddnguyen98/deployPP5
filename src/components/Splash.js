@@ -39,7 +39,7 @@ class Splash extends Component{
                 });
         }
         else{
-        this.setState({message: 'Make sure your password is the same'})
+        this.setState({message: 'Make both passwords you entered are the same.'})
         this.changeValTrue();
         }
     }

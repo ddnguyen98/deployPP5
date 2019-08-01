@@ -208,7 +208,7 @@ jsUcfirst = string =>
                           </div>
                           <Container style={styles.bio}>
                             <p>Hello my name is {dogName} and I am {dogTemp}. I enjoy playing in the park with other dogs and eating snacks</p>
-                            <p>My owner is called {uFirst} {uLast} and they take very good care o me.</p>
+                            <p>My owner is called {uFirst} {uLast} and they take very good care of me.</p>
                             <p>You can contact my owner at {uEmail} and I hope we can have a fun playdate!</p>
                           </Container>
                           </Card.Body>
