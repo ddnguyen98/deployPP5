@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import {Card, Container, Spinner, Button} from 'react-bootstrap'
+import {Card, Container, Button} from 'react-bootstrap'
 import { HashRouter, Route} from 'react-router-dom'
 import Navigation from './Navigation'
 import Footer from './Footer'
@@ -232,12 +232,13 @@ class Home  extends Component {
 
 const styles = {
   card: {
-    margin: '100px 0'
+    margin: '50px auto',
+    width: '85%'
   },
   img:{
     float: 'left',
     border: '#DADADA solid 1px',
-    margin: '10px'
+    margin: '10px 50px 10px 10px'
   },
   bio:{
     clear:'both'

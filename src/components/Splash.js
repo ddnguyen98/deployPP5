@@ -10,8 +10,7 @@ class Splash extends Component{
     passwordCheck: '',
     status: '',
     message: '',
-    show: false,
-    message: ''
+    show: false
     }
     createAccount = e =>{
         const { email, password, passwordCheck } = this.state;
@@ -21,12 +20,12 @@ class Splash extends Component{
                 firebase.auth().onAuthStateChanged((user) => {
                     firebase.database().ref(`users/${user.uid}`).set({
                         dogdates: ' ',
-                        bio: 'Enter dog bio here',
-                        dogAge: 'Age of dog',
-                        dogBreed: 'Breed of dog',
-                        dogName: 'Dogs name',
-                        first: 'Your first name',
-                        last: 'your Last name'
+                        bio: '',
+                        dogAge: '',
+                        dogBreed: '',
+                        dogName: '',
+                        first: '',
+                        last: ''
                     })
                     
                 })

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import * as firebase from 'firebase';
 import {Navbar, Nav, Form, FormControl, Button, Modal } from 'react-bootstrap'
+import logo from '../images/dog.png';
 
 
 class Navigation extends Component{
@@ -65,8 +66,14 @@ class Navigation extends Component{
     const {status} = this.state;
     if(status){
         return(
-            <Navbar bg="dark" variant="dark" expand="lg">
-                <Navbar.Brand href="#/">Paw Pals</Navbar.Brand>
+            <Navbar bg="dark" variant="dark" expand="lg" >
+                <Navbar.Brand href="#/">      
+                <img style={styles.logo}
+                src={logo}
+                width="50"
+                height="50"
+                alt="React Bootstrap logo"
+                />Paw Pals</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto justify-content-end">
@@ -94,10 +101,16 @@ class Navigation extends Component{
     else{
         return(
             <Navbar bg="dark" variant="dark" expand="lg">
-                <Navbar.Brand href="#/">Paw Pals</Navbar.Brand>   
+                <Navbar.Brand href="#/">                
+                <img style={styles.logo}
+                src={logo}
+                width="50"
+                height="50"
+                alt="React Bootstrap logo"
+                />Paw Pals</Navbar.Brand>   
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto justify-content-end">
+                    <Navbar.Collapse id="basic-navbar-nav" >
+                        <Nav className="mr-auto justify-content-end" >
                         <Nav.Link href="#/">Home</Nav.Link>
                         <Nav.Link href="#/profile">Profile</Nav.Link>
                         <Nav.Link href="#/matches">Matches</Nav.Link>
@@ -122,4 +135,10 @@ class Navigation extends Component{
 }
 
 export default Navigation;
+
+const styles = {
+    logo:{
+        margin: '0 10px'
+    }
+}
 

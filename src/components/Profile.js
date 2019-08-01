@@ -12,11 +12,12 @@ class Profile extends Component{
         dogName:'',
         dogBreed:'',
         dogAge:'',
-        firstName:'',
-        lastName:'',
+        first:'',
+        last:'',
         bio:'',
         dogdates:[],
-        loaded:false
+        loaded:false,
+        show: false
     }
 
     componentDidMount(){
@@ -27,8 +28,8 @@ class Profile extends Component{
                     dogName: snapshot.val().dogName, 
                     dogAge: snapshot.val().dogAge, 
                     dogBreed: snapshot.val().dogBreed, 
-                    firstName: snapshot.val().first, 
-                    lastName: snapshot.val().last, 
+                    first: snapshot.val().first, 
+                    last: snapshot.val().last, 
                     bio: snapshot.val().bio,
                 })
                 snapshot.child('dogdates').forEach(test=>{
@@ -42,7 +43,7 @@ class Profile extends Component{
         this.setState({[e.target.id]: e.target.value})
     }
     updateInfo = e =>{
-        const {dogName, dogAge, dogBreed, firstName, lastName, bio} = this.state
+        const {dogName, dogAge, dogBreed, first, last, bio} = this.state
         let user = firebase.auth().currentUser;
         firebase.database().ref('/users/' + user.uid).once('value').then((snapshot)=>{
             if (user != null) {
@@ -52,16 +53,19 @@ class Profile extends Component{
                     dogAge: dogAge,
                     dogBreed: dogBreed,
                     dogName: dogName,
-                    first: firstName,
-                    last: lastName
+                    first: first,
+                    last: last
                 })
             }
         })
 
     }
 
+    changeValTrue = () =>{this.setState({show:true})}
+    changeValFalse= () =>{this.setState({show:false})}
+
     render(){
-        const {dogName, dogAge, dogBreed, firstName, lastName, bio} = this.state
+        const {dogName, dogAge, dogBreed, first, last, bio} = this.state
 
 
         return(
@@ -72,18 +76,47 @@ class Profile extends Component{
                         <div>
                         <img src="https://pawedin.com/system/pets/default_images/default_pet.jpg" 
                        height="40%" width="40%" style={styles.img} alt="placeholder"></img>                 
-
+                            <Form.Group style={styles.group}>
+                            <Form.Label>Dog Name</Form.Label>
                             <Form.Control placeholder="Dog Name" type="text" id="dogName" value={dogName} style={styles.name} onChange={this.storeInfo} />
-
+                            </Form.Group>
+                            <Form.Group >
+                            <Form.Label>Dog Breed</Form.Label>
                             <Form.Control placeholder="Dog Breed" type="text" id="dogBreed" value={dogBreed} style={styles.breed} onChange={this.storeInfo}/>
+                            </Form.Group>
+                            <Form.Group >
+                            <Form.Label>Dog Age</Form.Label>
+                            <Form.Control placeholder="Dog Age" as="select" id="dogAge" value={dogAge} style={styles.age} onChange={this.storeInfo}>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                             </Form.Control>
+                            </Form.Group>
 
-                            <Form.Control placeholder="Dog Age" type="text" id="dogAge" value={dogAge} style={styles.age} onChange={this.storeInfo}/>
+                            <Form.Group >
+                            <Form.Label>Owner First Name</Form.Label>
+                            <Form.Control placeholder="First" type="text" id="first" value={first} style={styles.age} onChange={this.storeInfo}/>
+                            </Form.Group>
 
-                            <Form.Control placeholder="First" type="text" id="first" value={firstName} style={styles.age} onChange={this.storeInfo}/>
+                            <Form.Group >
+                            <Form.Label>Owner Last Name</Form.Label>
+                            <Form.Control placeholder="Last" type="text" id="last" value={last} style={styles.age} onChange={this.storeInfo}/>
+                            </Form.Group>
 
-                            <Form.Control placeholder="Last" type="text" id="last" value={lastName} style={styles.age} onChange={this.storeInfo}/>
                             </div>
+                            <Form.Group>
+                            <Form.Label>Description</Form.Label>
                             <Form.Control placeholder="Enter Bio Here" as="textarea" id="bio" rows="5" value={bio} style={styles.bio}onChange={this.storeInfo}/>
+                            </Form.Group>
 
                     </Form>
                     </Card.Body>
@@ -101,7 +134,7 @@ const styles = {
     img: {
         float: 'left',
         border: '#DADADA solid 1px',
-        margin: '0 10px 10px'
+        margin: '0 50px 100px 10px'
       },
       card:{
           margin:'50px'
@@ -134,6 +167,9 @@ const styles = {
       },
       bio:{
         margin: "5px"
+      },
+      group:{
+          display: 'inline'
       }
   }
 
